@@ -170,3 +170,4 @@ scratch*
 /mage_data*
 *secrets*.json
 your-first-project
+*.json
