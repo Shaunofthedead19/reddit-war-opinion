@@ -1,6 +1,7 @@
 import io
 import pandas as pd
 import requests
+import opendatasets as od
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
@@ -12,7 +13,7 @@ def load_data_from_api(*args, **kwargs):
     """
     Template for loading data from API
     """
-    url = 'https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-updated/data?select=reddit_opinion_PSE_ISR.csv'
+    url = 'https://data.cityofnewyork.us/resource/5ery-qagt.csv?$limit=500000'
     
     comment_dtypes = {
         'comment_id': str,
@@ -25,22 +26,25 @@ def load_data_from_api(*args, **kwargs):
         'ups': pd.Int64Dtype(),
         'downs': pd.Int64Dtype(),
         'user_is_verified': bool,
-        'user_awardee_karma': pd.Int64Dtype(),
-        'user_awarder_karma': pd.Int64Dtype(),
-        'user_link_karma': pd.Int64Dtype(),
-        'user_comment_karma': pd.Int64Dtype(),
-        'user_total_karma': pd.Int64Dtype(),
+        'user_awardee_karma': float,
+        'user_awarder_karma': float,
+        'user_link_karma': float,
+        'user_comment_karma': float,
+        'user_total_karma': float,
         'post_score': pd.Int64Dtype(),
         'post_self_text': str,
         'post_title': str,
-        'post_upvote_ratio': pd.Int64Dtype(),
+        'post_upvote_ratio': float,
         'post_thumbs_ups': pd.Int64Dtype(),
         'post_total_awards_received': pd.Int64Dtype()
     }
 
     parse_dates = ['created_time','user_account_created_time', 'post_created_time']
 
-    return pd.read_csv(url, dtype= comment_dtypes)
+    od.download("https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-updated/data?select=reddit_opinion_PSE_ISR.csv")
+
+    return pd.read_csv('/home/src/reddit-on-israel-palestine-daily-updated/reddit_opinion_PSE_ISR.csv', dtype=comment_dtypes, parse_dates = parse_dates)
+    #return print('successful')
 
 
 @test

@@ -19,8 +19,7 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - reddit_comments_to_gcs_parquet
-  - reddit_comments_to_gcs_partitioned_parquet
+  - export_reddit_comments_to_gcp_parameter
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -41,30 +40,14 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: reddit_comments_to_gcs_parquet
+  name: export_reddit_comments_to_gcp_parameter
   retry_config: null
   status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
   - transform_reddit_comments
-  uuid: reddit_comments_to_gcs_parquet
-- all_upstream_blocks_executed: true
-  color: null
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: reddit_comments_to_gcs_partitioned_parquet
-  retry_config: null
-  status: executed
-  timeout: null
-  type: data_exporter
-  upstream_blocks:
-  - transform_reddit_comments
-  uuid: reddit_comments_to_gcs_partitioned_parquet
+  uuid: export_reddit_comments_to_gcp_parameter
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
@@ -76,7 +59,7 @@ executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: api_to_gcs
+name: api_to_gcs_parameterized
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -86,6 +69,6 @@ settings:
 spark_config: {}
 tags: []
 type: python
-uuid: api_to_gcs
+uuid: api_to_gcs_parameterized
 variables_dir: /home/src/mage_data/reddit-war-opinion
 widgets: []

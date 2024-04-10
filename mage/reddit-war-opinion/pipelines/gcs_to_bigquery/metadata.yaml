@@ -3,80 +3,72 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - transform_reddit_comments
+  - transform_staged_data
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: load_api_data
+  name: load_reddit_comments_gcs
   retry_config: null
   status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
-  uuid: load_api_data
+  uuid: load_reddit_comments_gcs
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
   downstream_blocks:
-  - reddit_comments_to_gcs_parquet
-  - reddit_comments_to_gcs_partitioned_parquet
+  - write_reddit_comments_to_bigquery
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: transform_reddit_comments
+  name: transform_staged_data
   retry_config: null
   status: executed
   timeout: null
   type: transformer
   upstream_blocks:
-  - load_api_data
-  uuid: transform_reddit_comments
+  - load_reddit_comments_gcs
+  uuid: transform_staged_data
 - all_upstream_blocks_executed: true
   color: null
-  configuration: {}
+  configuration:
+    data_provider: bigquery
+    data_provider_profile: default
+    data_provider_schema: reddit_comments
+    data_provider_table: war_comments
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: false
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
-  language: python
-  name: reddit_comments_to_gcs_parquet
+  language: sql
+  name: write_reddit_comments_to_bigquery
   retry_config: null
   status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - transform_reddit_comments
-  uuid: reddit_comments_to_gcs_parquet
-- all_upstream_blocks_executed: true
-  color: null
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: reddit_comments_to_gcs_partitioned_parquet
-  retry_config: null
-  status: executed
-  timeout: null
-  type: data_exporter
-  upstream_blocks:
-  - transform_reddit_comments
-  uuid: reddit_comments_to_gcs_partitioned_parquet
+  - transform_staged_data
+  uuid: write_reddit_comments_to_bigquery
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-04-10 00:28:24.806368+00:00'
+created_at: '2024-04-10 11:33:32.934830+00:00'
 data_integration: null
 description: null
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: api_to_gcs
+name: gcs_to_bigquery
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -86,6 +78,6 @@ settings:
 spark_config: {}
 tags: []
 type: python
-uuid: api_to_gcs
+uuid: gcs_to_bigquery
 variables_dir: /home/src/mage_data/reddit-war-opinion
 widgets: []
