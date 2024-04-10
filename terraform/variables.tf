@@ -1,6 +1,6 @@
 variable "credentials" {
-    description = "My Credentials"
-    default = "/home/shaunak/reddit-war-opinion/de-project-terraform.json"
+  description = "My Credentials"
+  default     = "/home/shaunak/reddit-war-opinion/de-project-terraform.json"
 }
 
 variable "project" {
@@ -14,8 +14,8 @@ variable "location" {
 }
 
 variable "region" {
-    description = "Project Region"
-    default = "australia-southeast2"
+  description = "Project Region"
+  default     = "australia-southeast2"
 }
 
 variable "bq_dataset_name" {

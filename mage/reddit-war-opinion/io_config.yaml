@@ -37,8 +37,8 @@ default:
   DUCKDB_DATABASE: database
   DUCKDB_SCHEMA: main
   # Google
-  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/de-project-418719-75d9da900115.json"
-  GOOGLE_LOCATION: australia-southeast2 # Optional
+  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/de-project-terraform.json"
+  GOOGLE_LOCATION: AUSTRALIA-SOUTHEAST2 # Optional
   # MongoDB
   # Specify either the connection string or the (host, password, user, port) to connect to MongoDB.
   MONGODB_CONNECTION_STRING: "mongodb://{username}:{password}@{host}:{port}/"
