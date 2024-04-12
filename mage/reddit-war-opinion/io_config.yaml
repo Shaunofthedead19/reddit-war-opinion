@@ -122,3 +122,6 @@ default:
   WEAVIATE_INSTANCE_API_KEY: YOUR-WEAVIATE-API-KEY
   WEAVIATE_INFERENCE_API_KEY: YOUR-OPENAI-API-KEY
   WEAVIATE_COLLECTION: collectionn_name
+  # DBT
+  DBT_PROFILES_DIR: "/home/src/mage/reddit-war-opinion/dbt/rwo/profiles.yml"
+  DBT_PROJECT_DIR: "/home/src/mage/reddit-war-opinion/dbt/rwo/dbt_project.yml"

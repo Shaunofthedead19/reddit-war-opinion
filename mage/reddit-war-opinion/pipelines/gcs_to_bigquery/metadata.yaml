@@ -37,7 +37,7 @@ blocks:
   configuration:
     data_provider: bigquery
     data_provider_profile: default
-    data_provider_schema: reddit_comments
+    data_provider_schema: rwo_dataset
     data_provider_table: war_comments
     dbt: {}
     disable_query_preprocessing: false

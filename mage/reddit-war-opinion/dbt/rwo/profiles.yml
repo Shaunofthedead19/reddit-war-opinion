@@ -1,15 +1,4 @@
-# https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml
-
-# base:
-#   outputs:
-
-#     dev:
-#       type: duckdb
-
-#   target: dev
-
-
-reddit-war-comments:
+reddit-war-opinion:
   target: dev
   outputs:
     dev:
