@@ -17,6 +17,7 @@ def transform(data, *args, **kwargs):
     print(cleaned_data.shape)
     print(cleaned_data.dtypes)
 
+    cleaned_data['user_is_verified'] = cleaned_data['user_is_verified'].astype(bool)
 
     return cleaned_data
 

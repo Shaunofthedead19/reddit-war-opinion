@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+    - name: staging
+      database: de-project-418719
+      schema: rwo_dataset
+
+      tables:
+        - name: war_comments

@@ -2,6 +2,7 @@ import io
 import pandas as pd
 import requests
 import opendatasets as od
+import numpy as np
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
@@ -25,7 +26,7 @@ def load_data_from_api(*args, **kwargs):
         'controversiality': pd.Int64Dtype(),
         'ups': pd.Int64Dtype(),
         'downs': pd.Int64Dtype(),
-        'user_is_verified': bool,
+        'user_is_verified': str,
         'user_awardee_karma': float,
         'user_awarder_karma': float,
         'user_link_karma': float,

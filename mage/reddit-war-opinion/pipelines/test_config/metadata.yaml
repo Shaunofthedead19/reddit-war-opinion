@@ -1,19 +1,25 @@
 blocks:
 - all_upstream_blocks_executed: true
   color: null
-  configuration: {}
+  configuration:
+    dbt_project_name: dbt/rwo
+    file_path: dbt/rwo/models/staging/stg_war_comments.sql
+    file_source:
+      path: dbt/rwo/models/staging/stg_war_comments.sql
+      project_path: dbt/rwo
+    limit: 1000
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
-  language: python
-  name: test_gcs
+  language: sql
+  name: dbt/rwo/models/staging/stg_war_comments
   retry_config: null
   status: executed
   timeout: null
-  type: data_loader
+  type: dbt
   upstream_blocks: []
-  uuid: test_gcs
+  uuid: dbt/rwo/models/staging/stg_war_comments
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}

@@ -1,4 +1,4 @@
-reddit-war-opinion:
+rwo:
   target: dev
   outputs:
     dev:
