@@ -14,7 +14,7 @@ def load_data_from_api(*args, **kwargs):
     """
     Template for loading data from API
     """
-    url = 'https://data.cityofnewyork.us/resource/5ery-qagt.csv?$limit=500000'
+    url = "https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-updated/data?select=reddit_opinion_PSE_ISR.csv"
     
     comment_dtypes = {
         'comment_id': str,
@@ -42,7 +42,7 @@ def load_data_from_api(*args, **kwargs):
 
     parse_dates = ['created_time','user_account_created_time', 'post_created_time']
 
-    od.download("https://www.kaggle.com/datasets/asaniczka/reddit-on-israel-palestine-daily-updated/data?select=reddit_opinion_PSE_ISR.csv")
+    od.download(url)
 
     return pd.read_csv('/home/src/reddit-on-israel-palestine-daily-updated/reddit_opinion_PSE_ISR.csv', dtype=comment_dtypes, parse_dates = parse_dates)
     #return print('successful')

@@ -7,3 +7,107 @@ sources:
 
       tables:
         - name: war_comments
+
+models:
+  - name: stg_war_comments
+    description: ""
+    columns:
+      - name: comment_id
+        data_type: string
+        description: "" 
+        tests:
+          - unique:
+              severity: warn
+          - not_null:
+              severity: warn
+
+      - name: post_id
+        data_type: string
+        description: ""
+        tests:
+          - relationships:
+              field: post_id
+              to: ref('dim_post')
+              severity: warn
+
+      - name: author_name
+        data_type: string
+        description: "" 
+        tests:
+          - relationships:
+              field: author_name
+              to: ref('dim_author')
+              severity: warn
+
+      - name: comment_created_datetime
+        data_type: timestamp
+        description: "" 
+
+      - name: user_account_created_datetime
+        data_type: timestamp
+        description: "" 
+
+      - name: post_created_datetime
+        data_type: timestamp
+        description: "" 
+
+      - name: user_is_verified
+        data_type: boolean
+        description: "" 
+
+      - name: user_total_karma
+        data_type: int64
+        description: "" 
+
+      - name: post_score
+        data_type: numeric
+        description: "" 
+
+      - name: post_title
+        data_type: string
+        description: "" 
+
+      - name: post_self_text
+        data_type: string
+        description: "" 
+
+      - name: post_upvote_ratio
+        data_type: numeric
+        description: "" 
+
+      - name: post_thumbs_ups
+        data_type: int64
+        description: "" 
+
+      - name: post_total_awards_received
+        data_type: int64
+        description: "" 
+
+      - name: score
+        data_type: int64
+        description: "" 
+
+      - name: comment
+        data_type: string
+        description: "" 
+
+      - name: controversiality
+        data_type: boolean
+        description: "" 
+
+      - name: ups
+        data_type: int64
+        description: "" 
+
+      - name: downs
+        data_type: int64
+        description: "" 
+
+      - name: subreddit
+        data_type: string
+        description: ""
+        tests:
+          - relationships:
+              field: subreddit
+              to: ref('dim_subreddits')
+              severity: warn

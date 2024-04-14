@@ -1,0 +1,1 @@
+generate_model_yaml --args '{"model_names": ["stg_war_comments"]}'

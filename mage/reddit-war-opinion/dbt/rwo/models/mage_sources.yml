@@ -1,0 +1,14 @@
+sources:
+- description: Dataframes Mage upstream blocks
+  loader: mage
+  name: mage_rwo
+  schema: rwo_dataset
+  tables:
+  - description: Dataframe for block `reddit_comments_to_gcs_parquet` of the `api_to_gcs`
+      mage pipeline.
+    identifier: mage_api_to_gcs_reddit_comments_to_gcs_parquet
+    meta:
+      block_uuid: reddit_comments_to_gcs_parquet
+      pipeline_uuid: api_to_gcs
+    name: api_to_gcs_reddit_comments_to_gcs_parquet
+version: 2

@@ -8,18 +8,16 @@ if 'test' not in globals():
 def transform(data, *args, **kwargs):
     
     print('Total missing values: ', data.isna().sum().sum())
-    #print(data[data['post_self_text'].isna() == False].shape)
-    #print([column for column in list(data.columns) if((data[column].isna().sum()/len(data))*100 < 5.0)])
-    dropable  = [column for column in list(data.columns) if((data[column].isna().sum()/len(data))*100 < 5.0)]
-    print(dropable)
-    cleaned_data = data.dropna(subset=dropable).dropna(axis=1)
-    print(cleaned_data.isna().sum().sum())
-    print(cleaned_data.shape)
-    print(cleaned_data.dtypes)
+    print(data.isna().sum())
 
-    cleaned_data['user_is_verified'] = cleaned_data['user_is_verified'].astype(bool)
+    data.dropna(subset=['self_text'], inplace=True)
+    miss_values = {"user_is_verified": False, "user_account_created_time": '1900-01-01T00:00:00', "user_total_karma": 0, "post_self_text": 'NA'}
+    cleaned_data = data.fillna(value=miss_values)
+    cleaned_data.dropna(axis=1, inplace=True)
 
-    return cleaned_data
+    print(cleaned_data.isna().sum())
+
+    {{ dbt_utils.generate_surrogate_key(["subreddit"]) }} as subreddit_id,{{ dbt_utils.generate_surrogate_key(["subreddit"]) }} as subreddit_id,return cleaned_data
 
 @test
 def test_output(output, *args):
