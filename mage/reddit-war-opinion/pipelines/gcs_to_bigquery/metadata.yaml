@@ -26,13 +26,13 @@ blocks:
   language: python
   name: transform_staged_data
   retry_config: null
-  status: updated
+  status: executed
   timeout: null
   type: transformer
   upstream_blocks:
   - load_reddit_comments_gcs
   uuid: transform_staged_data
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     data_provider: bigquery
@@ -41,7 +41,7 @@ blocks:
     data_provider_table: war_comments
     dbt: {}
     disable_query_preprocessing: false
-    export_write_policy: append
+    export_write_policy: replace
     file_source:
       path: data_exporters/write_reddit_comments_to_bigquery.sql
     limit: 1000
@@ -53,7 +53,7 @@ blocks:
   language: sql
   name: write_reddit_comments_to_bigquery
   retry_config: null
-  status: not_executed
+  status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:

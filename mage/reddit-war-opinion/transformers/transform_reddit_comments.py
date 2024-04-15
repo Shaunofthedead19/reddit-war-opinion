@@ -16,8 +16,8 @@ def transform(data, *args, **kwargs):
     cleaned_data.dropna(axis=1, inplace=True)
 
     print(cleaned_data.isna().sum())
-
-    {{ dbt_utils.generate_surrogate_key(["subreddit"]) }} as subreddit_id,{{ dbt_utils.generate_surrogate_key(["subreddit"]) }} as subreddit_id,return cleaned_data
+    
+    return cleaned_data
 
 @test
 def test_output(output, *args):

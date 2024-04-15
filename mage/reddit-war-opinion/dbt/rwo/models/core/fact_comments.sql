@@ -54,6 +54,7 @@ SELECT
     wc.score,
     wc.comment,
     wc.controversiality,
+    comment_created_datetime,
     wc.ups,
     wc.downs,
     sr.subreddit,

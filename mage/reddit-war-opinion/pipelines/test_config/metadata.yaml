@@ -2,27 +2,6 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration:
-    dbt_project_name: dbt/rwo
-    file_path: dbt/rwo/models/staging/stg_war_comments.sql
-    file_source:
-      path: dbt/rwo/models/staging/stg_war_comments.sql
-      project_path: dbt/rwo
-    limit: 1000
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: sql
-  name: dbt/rwo/models/staging/stg_war_comments
-  retry_config: null
-  status: executed
-  timeout: null
-  type: dbt
-  upstream_blocks: []
-  uuid: dbt/rwo/models/staging/stg_war_comments
-- all_upstream_blocks_executed: true
-  color: null
-  configuration:
     dbt:
       command: run-operation
     dbt_profile_target: ''
@@ -32,8 +11,7 @@ blocks:
     file_source:
       path: dbts/generate_model.yaml
     use_raw_sql: false
-  downstream_blocks:
-  - dbt_build
+  downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -45,7 +23,7 @@ blocks:
   type: dbt
   upstream_blocks: []
   uuid: generate_model
-- all_upstream_blocks_executed: false
+- all_upstream_blocks_executed: true
   color: null
   configuration:
     dbt:
@@ -64,11 +42,10 @@ blocks:
   language: yaml
   name: dbt_build
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: dbt
-  upstream_blocks:
-  - generate_model
+  upstream_blocks: []
   uuid: dbt_build
 cache_block_output_in_memory: false
 callbacks: []

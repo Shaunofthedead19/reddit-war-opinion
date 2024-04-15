@@ -1,0 +1,76 @@
+version: 2
+
+ 
+
+models:
+  - name: dim_author
+    description: >
+      List of distinct authors, with ID.
+      Includes details such as if user was verified and account creation datetime.
+    columns:
+      - name: author_id
+        data_type: string
+        description: "" 
+
+      - name: author_name
+        data_type: string
+        description: "" 
+
+      - name: user_is_verified
+        data_type: boolean
+        description: "" 
+
+      - name: user_account_created_datetime
+        data_type: timestamp
+        description: "" 
+
+      - name: user_total_karma
+        data_type: int64
+        description: ""
+  - name: dim_post
+    description: >
+      List of distinct posts with post_id.
+      Includes info on posts such as text and post creation date and post score.
+    columns:
+      - name: post_id
+        data_type: string
+        description: ""
+
+      - name: post_self_text
+        data_type: string
+        description: "" 
+
+      - name: post_title
+        data_type: string
+        description: "" 
+
+      - name: post_score
+        data_type: numeric
+        description: ""
+
+      - name: post_upvote_ratio
+        data_type: numeric
+        description: "" 
+
+      - name: post_thumbs_ups
+        data_type: int64
+        description: "" 
+
+      - name: post_created_datetime
+        data_type: timestamp
+        description: "" 
+
+      - name: post_total_awards_received
+        data_type: int64
+        description: ""
+  - name: dim_subreddits
+    description: >
+      List of distinct subreddits.
+    columns:
+      - name: subreddit_id
+        data_type: string
+        description: "" 
+
+      - name: subreddit
+        data_type: string
+        description: ""
