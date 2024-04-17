@@ -5,7 +5,7 @@ rwo:
       type: bigquery
       method: service-account
       project: de-project-418719
-      dataset: rwo_dataset
+      dataset: stg_rwo_dataset
       threads: 4 # Must be a value of 1 or greater
       keyfile: "/home/src/de-project-terraform.json"
       location: australia-southeast2
@@ -13,7 +13,7 @@ rwo:
       type: bigquery
       method: service-account
       project: de-project-418719
-      dataset: rwo_prod_dataset
+      dataset: prod_rwo_dataset
       threads: 4 # Must be a value of 1 or greater
       keyfile: "/home/src/de-project-terraform.json"
       location: australia-southeast2

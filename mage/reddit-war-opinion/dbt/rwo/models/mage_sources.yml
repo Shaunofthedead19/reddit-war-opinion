@@ -2,7 +2,7 @@ sources:
 - description: Dataframes Mage upstream blocks
   loader: mage
   name: mage_rwo
-  schema: rwo_dataset
+  schema: stg_rwo_dataset
   tables:
   - description: Dataframe for block `reddit_comments_to_gcs_parquet` of the `api_to_gcs`
       mage pipeline.
@@ -11,4 +11,11 @@ sources:
       block_uuid: reddit_comments_to_gcs_parquet
       pipeline_uuid: api_to_gcs
     name: api_to_gcs_reddit_comments_to_gcs_parquet
+  - description: Dataframe for block `write_reddit_comments_to_bigquery` of the `gcs_to_bigquery`
+      mage pipeline.
+    identifier: mage_gcs_to_bigquery_write_reddit_comments_to_bigquery
+    meta:
+      block_uuid: write_reddit_comments_to_bigquery
+      pipeline_uuid: gcs_to_bigquery
+    name: gcs_to_bigquery_write_reddit_comments_to_bigquery
 version: 2

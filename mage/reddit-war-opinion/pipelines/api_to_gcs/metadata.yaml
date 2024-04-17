@@ -35,7 +35,8 @@ blocks:
 - all_upstream_blocks_executed: true
   color: null
   configuration: {}
-  downstream_blocks: []
+  downstream_blocks:
+  - custom_cleanup_files
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -48,6 +49,39 @@ blocks:
   upstream_blocks:
   - transform_reddit_comments
   uuid: reddit_comments_to_gcs_parquet
+- all_upstream_blocks_executed: true
+  color: teal
+  configuration: {}
+  downstream_blocks:
+  - trigger_gcs_to_bigquery
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: custom_cleanup_files
+  retry_config: null
+  status: executed
+  timeout: null
+  type: custom
+  upstream_blocks:
+  - reddit_comments_to_gcs_parquet
+  uuid: custom_cleanup_files
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: trigger_gcs_to_bigquery
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - custom_cleanup_files
+  uuid: trigger_gcs_to_bigquery
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}

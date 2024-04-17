@@ -46,7 +46,8 @@ blocks:
       path: data_exporters/write_reddit_comments_to_bigquery.sql
     limit: 1000
     use_raw_sql: false
-  downstream_blocks: []
+  downstream_blocks:
+  - dbt_build
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -59,6 +60,31 @@ blocks:
   upstream_blocks:
   - transform_staged_data
   uuid: write_reddit_comments_to_bigquery
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    dbt:
+      command: build
+    dbt_profile_target: ''
+    dbt_project_name: dbt/rwo
+    disable_query_preprocessing: false
+    export_write_policy: append
+    file_source:
+      path: dbts/dbt_build.yaml
+    use_raw_sql: false
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: yaml
+  name: dbt_build
+  retry_config: null
+  status: not_executed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - write_reddit_comments_to_bigquery
+  uuid: dbt_build
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
