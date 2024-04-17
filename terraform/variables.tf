@@ -23,6 +23,16 @@ variable "bq_dataset_name" {
   default     = "rwo_dataset"
 }
 
+variable "bq_stage_dataset_name" {
+  description = "Reddit War Opinion Dataset"
+  default     = "stg_rwo_dataset"
+}
+
+variable "bq_prod_dataset_name" {
+  description = "Reddit War Opinion Dataset"
+  default     = "prod_rwo_dataset"
+}
+
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
   default     = "de-project-418719-rwo-bucket"

@@ -30,8 +30,20 @@ resource "google_storage_bucket" "rwo-bucket" {
   }
 }
 
-resource "google_bigquery_dataset" "rwo-dataset" {
+resource "google_bigquery_dataset" "source_dataset" {
   dataset_id                 = var.bq_dataset_name
+  location                   = var.location
+  delete_contents_on_destroy = true
+}
+
+resource "google_bigquery_dataset" "stage_dataset" {
+  dataset_id                 = var.bq_stage_dataset_name
+  location                   = var.location
+  delete_contents_on_destroy = true
+}
+
+resource "google_bigquery_dataset" "prod_dataset" {
+  dataset_id                 = var.bq_prod_dataset_name
   location                   = var.location
   delete_contents_on_destroy = true
 }
