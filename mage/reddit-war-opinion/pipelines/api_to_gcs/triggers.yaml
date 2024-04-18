@@ -1,6 +1,6 @@
 triggers:
 - envs: []
-  last_enabled_at: 2024-04-17 11:23:25.910982
+  last_enabled_at: 2024-04-18 07:20:24.501805
   name: trigger_pipelines
   pipeline_uuid: api_to_gcs
   schedule_interval: '@once'
@@ -8,5 +8,5 @@ triggers:
   settings: null
   sla: null
   start_time: 2024-04-16 09:18:00
-  status: inactive
+  status: active
   variables: {}

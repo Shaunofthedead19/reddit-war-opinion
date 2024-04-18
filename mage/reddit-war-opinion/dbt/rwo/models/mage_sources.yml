@@ -2,7 +2,7 @@ sources:
 - description: Dataframes Mage upstream blocks
   loader: mage
   name: mage_rwo
-  schema: stg_rwo_dataset
+  schema: prod_rwo_dataset
   tables:
   - description: Dataframe for block `reddit_comments_to_gcs_parquet` of the `api_to_gcs`
       mage pipeline.

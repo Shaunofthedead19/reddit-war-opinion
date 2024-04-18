@@ -65,7 +65,7 @@ blocks:
   configuration:
     dbt:
       command: build
-    dbt_profile_target: ''
+    dbt_profile_target: prod
     dbt_project_name: dbt/rwo
     disable_query_preprocessing: false
     export_write_policy: append
@@ -79,7 +79,7 @@ blocks:
   language: yaml
   name: dbt_build
   retry_config: null
-  status: not_executed
+  status: executed
   timeout: null
   type: dbt
   upstream_blocks:
