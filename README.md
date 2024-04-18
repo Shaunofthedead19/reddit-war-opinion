@@ -56,10 +56,19 @@ The columns within the dataset are as follows:
 22. `post_thumbs_ups`: Number of upvotes received by the post.
 23. `post_total_awards_received`: Total number of awards received by the post.
 24. `post_created_time`: Timestamp indicating when the post was created.
+
+> [!NOTE]
+While the dataset has been regularly updated the author did forget to configure the archive version of the dataset on 09/04/2024 Australia Time, causing the pipelines to not be able to read the data. In which case, if the csv file is available and can be downloaded, please do so and add it to the Proect while running, so the pipelines can access the dataset. Unfortunately, due to time constraints, I ws not able to incorporate that myself, however, I will do so in near future.
+
+![Data Source Incorrectly configured](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/File%20Error.PNG)
+
+
 ***
 
 ## Project Architecture
 This Architecture depicts an end-to-end overview of the Project and its components.
+
+![Project Architecture](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/Reddit-War-Opinion.svg)
 
 ### Technologies
 * **Cloud**: [Google Cloud Platform (GCP)](https://cloud.google.com/?hl=en)
@@ -137,7 +146,7 @@ Setting Up GCP with your google account allows for $300 worth credit on a 90-day
         This should allow you to use docker-compose anywhere in the VM.
     
     * Use `nano .bashrc` to open "".bashrc" executable file. At the end of the file, write: export PATH="${HOME}/bin:${PATH}". Press `CTRL+O` to save, `CTRL+X` to exit and `source .bashrc` re-evaluate VM. This has added "~/bin/" to VM $PATH which will allow us to execute commands from anywhere in the VM.
-    * Install Terraform, by copying link address to distribution run `wget <link-address>` in "~/bin/". I have used Linux distribution AMD64 version. Unzip the distribution, which should add terraform executable in bin folder.
+    * Install Terraform, by copying [link](https://developer.hashicorp.com/terraform/install) address to distribution run `wget <link-address>` in "~/bin/". I have used Linux distribution AMD64 version. Unzip the distribution, which should add terraform executable in bin folder.
     * On you local machine, open another bash terminal, while the VM is running. Navigate to location of Service Account Key File, located in "~/Users/<laptop-username>/.gc/" and, using bash, run `sftp <VM-Name>`. This will open an sftp terminal. Create a directory .gc where you will copy the my-credentials.json to. Exit sftp. run `ssh <VM-Name>` to log into VM using new terminal and locate the JSON file in .gc directory to make sure, file has been transferred.
     * To Authenticate Google Creds for your application, in your VM bash terminal run 
     `export GOOGLE_APPLICATION_CREDENTIALS=~/.gc/my-credentials.json`. 
@@ -176,7 +185,7 @@ and execute the following commands to create GCP resources, **Google Cloud Stora
     terraform apply --var="<ENTER-PROJECT-ID>"
     ```
     The terraform directory contains `main.tf` and `variable.tf` files, which contain the definition of the GCS Bucket and BigQuery dataset to be created, and the values configured to variables.
-4. Similarly, in the Visual Studio File Explorer, navigate to "~/reddit-war-opinion/mage/" and edit  From the terminal, navigate to mage directory of cloned repo ("~/reddit-war-opinion/mage/"). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to ~/reddit-war-opinion/mage/ create a .env file, which will contain the following environment variables for you Mage AI image:
+4. Similarly, in the Visual Studio File Explorer, navigate to "~/reddit-war-opinion/mage/" and edit  From the terminal, navigate to mage directory of cloned repo ("~/reddit-war-opinion/mage/"). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to "~/reddit-war-opinion/mage/" and create a .env file, which will contain the following environment variables for you Mage AI image:
     `PROJECT_NAME=reddit-war-opinion`
     `GCLOUD_PROJECT_NAME=<GCLOUD-PROJECT-NAME>`
 Once done, use the following command to build and run the Mage AI docker image of your project.
@@ -200,8 +209,12 @@ Once you are done playing around with the project, follow these steps to pull do
 * Finally run `sudo shutdown now` to shutdown you VM!
 
 And your project has been shutdown completely without the risk of incurring any costs from stray resources stil running.
-    
 
+***
 
+## Future Improvements
+* Use Spark to load data into bigquery.
+* Use a self-developed script to Scrape and use the data.
+* Improvements in Data Modelling
 
 
