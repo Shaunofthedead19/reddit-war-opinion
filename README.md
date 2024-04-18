@@ -89,7 +89,7 @@ Setting Up GCP with your google account allows for $300 worth credit on a 90-day
         * `Compute Admin`
     
         Alternately, you could work with just providing the `Owner` role, however this might be less secure, incase of loss of credentials.
-    * Create and Download the service account key file (JSON). This will be used for authentication purposes when using Mage AI, dbt etc. Save the file in "~/Users/<laptop-username>/.gc/"
+    * Create and Download the service account key file (JSON). This will be used for authentication purposes when using Mage AI, dbt etc. Save the file in "~/Users/<laptop-username>/.gc/". I have used 'my-credentials.json' as filename to make it more simpler.
     * Create SSH key Pairs. This will be used to link your local machine to a VM. Use the following command in bash to create the key pairs. Switch 'USERNAME' with your computers name and KEY_FILENAME with a suitable name for your key files.
         ```bash
         ssh-keygen -t rsa -f ~/Users/<laptop-username>/.ssh/KEY_FILENAME -C USERNAME -b 2048
@@ -138,48 +138,50 @@ Setting Up GCP with your google account allows for $300 worth credit on a 90-day
     
     * Use `nano .bashrc` to open "".bashrc" executable file. At the end of the file, write: export PATH="${HOME}/bin:${PATH}". Press `CTRL+O` to save, `CTRL+X` to exit and `source .bashrc` re-evaluate VM. This has added "~/bin/" to VM $PATH which will allow us to execute commands from anywhere in the VM.
     * Install Terraform, by copying link address to distribution run `wget <link-address>` in "~/bin/". I have used Linux distribution AMD64 version. Unzip the distribution, which should add terraform executable in bin folder.
-    * On you local machine, open another bash terminal, while the VM is running. Navigate to location of Service Account Key File, located in "~/Users/<laptop-username>/.gc/" and, using bash, run `sftp <VM-Name>`. This will open an sftp terminal. Create a directory .gc where you will copy the <Key-File>.json to. Exit sftp. run `ssh <VM-Name>` to log into VM using new terminal and locate the JSON file in .gc directory to make sure, file has been transferred.
+    * On you local machine, open another bash terminal, while the VM is running. Navigate to location of Service Account Key File, located in "~/Users/<laptop-username>/.gc/" and, using bash, run `sftp <VM-Name>`. This will open an sftp terminal. Create a directory .gc where you will copy the my-credentials.json to. Exit sftp. run `ssh <VM-Name>` to log into VM using new terminal and locate the JSON file in .gc directory to make sure, file has been transferred.
     * To Authenticate Google Creds for your application, in your VM bash terminal run 
-    `export GOOGLE_APPLICATION_CREDENTIALS=~/.gc/<Key-File>.json`. 
+    `export GOOGLE_APPLICATION_CREDENTIALS=~/.gc/my-credentials.json`. 
     You can check the variable using `echo $GOOGLE_APPLICATION_CREDENTIALS`. 
     Execute `gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS` to authenticate your gcloud account in VM.
 
 2. Kaggle
-    If your Kaggle account has already been created, navigate to [link](https://www.kaggle.com/settings/account). Create a New Token and save the file as <kaggle-key>.json.
+    If your Kaggle account has already been created, navigate to [link](https://www.kaggle.com/settings/account). Create a New Token and save the file as kaggle.json.
 ***
 
 #### Running Project
 1. Clone Repo
     Log into your VM using a bash terminal and `ssh <VM-Name>` and clone the reddit-war-opinion repo using this [link](https://github.com/Shaunofthedead19/reddit-war-opinion.git).
-    Currently while we have all the prerequisites installed for this project the repo mentioned above will contain all the files required to successfully execute the project. However, we still have to add <Key-File>.json and <kaggle-file>.json locations within the reddit-war-opinion project to successfully authenticate and create resources.
+    Currently while we have all the prerequisites installed for this project the repo mentioned above will contain all the files required to successfully execute the project. However, we still have to add my-credentials.json and kaggle.json locations within the reddit-war-opinion project to successfully authenticate and create resources.
 2. Add Key File Locations to Project
-    The two key files <Key-File>.json and <kaggle-file>.json need to be stored in a location where both terraform and Mage AI can access them. Since, we are running a docker image to run Mage AI, the home directory (/home/src/) is actually configured as '~/home/username/reddit-war-opinion/mage/', i.e. the home directory for Mage AI starts from the location: '~/home/username/reddit-war-opinion/mage/' and its files and subdirectories. The two key files would ideally house in this location as it also allows our pipelines to detect the files more easily.
+    The two key files my-credentials.json and kaggle.json need to be stored in a location where both terraform and Mage AI can access them. Since, we are running a docker image to run Mage AI, the home directory (/home/src/) is actually configured as '~/home/username/reddit-war-opinion/mage/', i.e. the home directory for Mage AI starts from the location: '~/home/username/reddit-war-opinion/mage/' and its files and subdirectories. The two key files would ideally house in this location as it also allows our pipelines to detect the files more easily.
     From the home directory in bash (/home/username/), use, the following to copy <key-file>:
     ```bash
-    cp '~/.gc/<key-file>.json' '~/reddit-war-opinion/mage/'
+    cp '~/.gc/my-credentials..json' '~/reddit-war-opinion/mage/my-credentials.json'
     ```
-    and from a bash terminal in your local machine containing <kaggle-file>.json sftp to '~/reddit-war-opinion/mage/', as was done with the <key-file>.json earlier.
+    and from a bash terminal in your local machine containing kaggle.json sftp to '~/reddit-war-opinion/mage/', as was done with the my-credentials.json earlier.
     
-3. Using the bash terminal logged into your VM, navigate to terraform folder of the cloned repo ('~/reddit-war-opinion/terraform/') and execute the following commands to create GCP resources, **Google Cloud Storage Bucket** & **Google Cloud Bigquery Dataset**:
+3. On your local machine, open VS Code. In the bottom let corner select `><` to open a remote window and select 'Connect to Host'. Your VM should show up as one of the options. Select the VM. When it opens, select Open Folder in the File Explorer on the left panel and from the dropdown dislaying contents of your VM, select the repo directory. This will open the directory in VM. From the directory navigate to '/terraform/'. This is a variable.tf file which contains dictionaries necessary for the configurations in main.tf. Edit "credentials" variable to set the default value as location of the <key-file>.json file you just copied. This will allow Terraform to authenticate properly. 
+Then Using the bash terminal logged into your VM, navigate to terraform folder of the cloned repo ('~/reddit-war-opinion/terraform/')
+and execute the following commands to create GCP resources, **Google Cloud Storage Bucket** & **Google Cloud Bigquery Dataset**:
     *   To initialize:
     ```bash
     terraform init
     ```
     * Build:
     ```bash
-    terraform plan
+    terraform plan --var="project=<ENTER-PROJECT-ID>"
     ```
     * Run:
     ```bash
-    terraform apply
+    terraform apply --var="<ENTER-PROJECT-ID>"
     ```
     The terraform directory contains `main.tf` and `variable.tf` files, which contain the definition of the GCS Bucket and BigQuery dataset to be created, and the values configured to variables.
-4. From the terminal, navigate to mage directory of cloned repo ('~/reddit-war-opinion/mage/'). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Use the following command to build and run the Mage AI docker image of our project.
+4. Similarly, in the Visual Studio File Explorer, navigate to '~/reddit-war-opinion/mage/' and edit  From the terminal, navigate to mage directory of cloned repo ('~/reddit-war-opinion/mage/'). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Use the following command to build and run the Mage AI docker image of our project.
     ```bash
     docker-compose up -d --build
     ```
     Once the docker imag is built, you can check if the image is running using the command `docker ps`. This image is configured to run on the port: 6789.
-5. On your local machine, open VS Code. In the bottom let corner select `><` to open a remote window and select 'Connect to Host'. Your VM should show up as one of the options. Select the VM. When it opens, select Open Folder in the File Explorer on the left panel and from the dropdown dislaying contents of your VM, select the repo directory. This will open the directory in VM. Open terminal and navigate to the 'PORTS' tab. From there, select 'Forward a Port'. Here we are going to connect to the Mage AI localhost. Type the Port number 6789 and it should link you to the http://localhost:6789/ .
+5. Open terminal and navigate to the 'PORTS' tab. From there, select 'Forward a Port'. Here we are going to connect to the Mage AI localhost. Type the Port number 6789 and it should link you to the http://localhost:6789/ .
 6. Once in the Mage AI web interace in localhost navigate to Pipelines section from the left panel. It should dislay the pipelines:
     * `api_to_gcs`: This pipeline gets the data from kaggle source, by access the <kaggle-file>.json file from mage directory, and authenticating credentials. It then conducts some transformations to clean the data and exports to gcs bucket configured in our main.tf terraform files. Ultimately, the pipeline cleans residual data files and triggers our second pipeline.
     * `gcs_to_bigquery`: This pipeline loads data from gcs, carries out further transforations before writing the data to BigQuery using our rwo_dataset configured in main.tf. Then, it runs a `dbt build --select +fact_comments+ --vars '{"is_test_run": 'false'}'` in prod environment to execute some transformations in dbt and building the data models into prod_rwo_dataset in BigQuery, configured in main.tf.

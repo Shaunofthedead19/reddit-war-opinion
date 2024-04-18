@@ -43,7 +43,7 @@ blocks:
   language: python
   name: reddit_comments_to_gcs_parquet
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_exporter
   upstream_blocks:

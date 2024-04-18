@@ -1,11 +1,10 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "/home/shaunak/reddit-war-opinion/mage/de-project-terraform.json"
+  default     = "/home/shaunak/reddit-war-opinion/mage/my-credentials.json"
 }
 
 variable "project" {
   description = "Project"
-  default     = "de-project-418719"
 }
 
 variable "location" {
@@ -35,7 +34,7 @@ variable "bq_prod_dataset_name" {
 
 variable "gcs_bucket_name" {
   description = "My Storage Bucket Name"
-  default     = "de-project-418719-rwo-bucket"
+  default     = "rwo-bucket"
 }
 
 variable "gcs_storage_class" {

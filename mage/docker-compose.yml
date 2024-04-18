@@ -10,7 +10,8 @@ services:
       dockerfile: Dockerfile
     environment:
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
-      ENV: ${ENV}
+      GOOGLE_APPLICATION_CREDENTIALS: /home/src/my-credentials.json
+      GCLOUD_PROJECT_NAME: ${GCLOUD_PROJECT_NAME}
     ports:
       - 6789:6789
     volumes:

@@ -19,7 +19,7 @@ def load_from_google_cloud_storage(*args, **kwargs):
     config_path = path.join(get_repo_path(), 'io_config.yaml')
     config_profile = 'default'
 
-    bucket_name = 'de-project-418719-rwo-bucket'
+    bucket_name = 'rwo-bucket'
     object_key = 'reddit_war_comments.parquet'
 
     return GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).load(

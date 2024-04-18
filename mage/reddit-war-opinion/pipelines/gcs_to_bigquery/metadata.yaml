@@ -10,12 +10,12 @@ blocks:
   language: python
   name: load_reddit_comments_gcs
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: data_loader
   upstream_blocks: []
   uuid: load_reddit_comments_gcs
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks:
@@ -26,13 +26,13 @@ blocks:
   language: python
   name: transform_staged_data
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: transformer
   upstream_blocks:
   - load_reddit_comments_gcs
   uuid: transform_staged_data
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration:
     data_provider: bigquery
@@ -47,7 +47,7 @@ blocks:
     limit: 1000
     use_raw_sql: false
   downstream_blocks:
-  - dbt_build
+  - dbt_deps
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -60,7 +60,7 @@ blocks:
   upstream_blocks:
   - transform_staged_data
   uuid: write_reddit_comments_to_bigquery
-- all_upstream_blocks_executed: true
+- all_upstream_blocks_executed: false
   color: null
   configuration:
     dbt:
@@ -79,12 +79,38 @@ blocks:
   language: yaml
   name: dbt_build
   retry_config: null
+  status: failed
+  timeout: null
+  type: dbt
+  upstream_blocks:
+  - dbt_deps
+  uuid: dbt_build
+- all_upstream_blocks_executed: false
+  color: null
+  configuration:
+    dbt:
+      command: deps
+    dbt_profile_target: prod
+    dbt_project_name: dbt/rwo
+    disable_query_preprocessing: false
+    export_write_policy: append
+    file_source:
+      path: dbts/dbt_deps.yaml
+    use_raw_sql: false
+  downstream_blocks:
+  - dbt_build
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: yaml
+  name: dbt_deps
+  retry_config: null
   status: executed
   timeout: null
   type: dbt
   upstream_blocks:
   - write_reddit_comments_to_bigquery
-  uuid: dbt_build
+  uuid: dbt_deps
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}

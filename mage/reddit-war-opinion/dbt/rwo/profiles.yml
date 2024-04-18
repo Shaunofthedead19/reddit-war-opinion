@@ -4,16 +4,16 @@ rwo:
     dev:
       type: bigquery
       method: service-account
-      project: de-project-418719
+      project: "{{ env_var('GCLOUD_PROJECT_NAME') }}"
       dataset: stg_rwo_dataset
       threads: 4 # Must be a value of 1 or greater
-      keyfile: "/home/src/de-project-terraform.json"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
       location: australia-southeast2
     prod:
       type: bigquery
       method: service-account
-      project: de-project-418719
+      project: "{{ env_var('GCLOUD_PROJECT_NAME') }}"
       dataset: prod_rwo_dataset
       threads: 4 # Must be a value of 1 or greater
-      keyfile: "/home/src/de-project-terraform.json"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
       location: australia-southeast2
