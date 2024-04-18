@@ -160,7 +160,7 @@ Setting Up GCP with your google account allows for $300 worth credit on a 90-day
     ```
     and from a bash terminal in your local machine containing kaggle.json sftp to '~/reddit-war-opinion/mage/', as was done with the my-credentials.json earlier.
     
-3. On your local machine, open VS Code. In the bottom let corner select `><` to open a remote window and select 'Connect to Host'. Your VM should show up as one of the options. Select the VM. When it opens, select Open Folder in the File Explorer on the left panel and from the dropdown dislaying contents of your VM, select the repo directory. This will open the directory in VM. From the directory navigate to '/terraform/'. This is a variable.tf file which contains dictionaries necessary for the configurations in main.tf. Edit "credentials" variable to set the default value as location of the <key-file>.json file you just copied. This will allow Terraform to authenticate properly. 
+3. On your local machine, open VS Code. In the bottom let corner select `><` to open a remote window and select 'Connect to Host'. Your VM should show up as one of the options. Select the VM. When it opens, select Open Folder in the File Explorer on the left panel and from the dropdown dislaying contents of your VM, select the repo directory. This will open the directory in VM. From the directory navigate to '/terraform/'. This is a variable.tf file which contains dictionaries necessary for the configurations in main.tf. Edit "credentials" variable to set the default value as location of the my-credentials.json file you just copied. This will allow Terraform to authenticate properly. 
 Then Using the bash terminal logged into your VM, navigate to terraform folder of the cloned repo ('~/reddit-war-opinion/terraform/')
 and execute the following commands to create GCP resources, **Google Cloud Storage Bucket** & **Google Cloud Bigquery Dataset**:
     *   To initialize:
@@ -176,11 +176,14 @@ and execute the following commands to create GCP resources, **Google Cloud Stora
     terraform apply --var="<ENTER-PROJECT-ID>"
     ```
     The terraform directory contains `main.tf` and `variable.tf` files, which contain the definition of the GCS Bucket and BigQuery dataset to be created, and the values configured to variables.
-4. Similarly, in the Visual Studio File Explorer, navigate to '~/reddit-war-opinion/mage/' and edit  From the terminal, navigate to mage directory of cloned repo ('~/reddit-war-opinion/mage/'). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Use the following command to build and run the Mage AI docker image of our project.
+4. Similarly, in the Visual Studio File Explorer, navigate to '~/reddit-war-opinion/mage/' and edit  From the terminal, navigate to mage directory of cloned repo ('~/reddit-war-opinion/mage/'). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to ~/reddit-war-opinion/mage/ create a .env file, which will contain the following environment variables for you Mage AI image:
+    `PROJECT_NAME=reddit-war-opinion`
+    `GCLOUD_PROJECT_NAME=<GCLOUD-PROJECT-NAME>`
+Once done, use the following command to build and run the Mage AI docker image of your project.
     ```bash
     docker-compose up -d --build
     ```
-    Once the docker imag is built, you can check if the image is running using the command `docker ps`. This image is configured to run on the port: 6789.
+    Once the docker image is built, you can check if the image is running using the command `docker ps`. This image is configured to run on the port: 6789.
 5. Open terminal and navigate to the 'PORTS' tab. From there, select 'Forward a Port'. Here we are going to connect to the Mage AI localhost. Type the Port number 6789 and it should link you to the http://localhost:6789/ .
 6. Once in the Mage AI web interace in localhost navigate to Pipelines section from the left panel. It should dislay the pipelines:
     * `api_to_gcs`: This pipeline gets the data from kaggle source, by access the <kaggle-file>.json file from mage directory, and authenticating credentials. It then conducts some transformations to clean the data and exports to gcs bucket configured in our main.tf terraform files. Ultimately, the pipeline cleans residual data files and triggers our second pipeline.

@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import opendatasets as od
 import numpy as np
+
 if 'data_loader' not in globals():
     from mage_ai.data_preparation.decorators import data_loader
 if 'test' not in globals():
@@ -41,8 +42,10 @@ def load_data_from_api(*args, **kwargs):
     }
 
     parse_dates = ['created_time','user_account_created_time', 'post_created_time']
-
-    od.download(url)
+    try:
+        od.download(url)
+    except:
+        print("The link does not work. Please contact author.")
 
     return pd.read_csv('/home/src/reddit-on-israel-palestine-daily-updated/reddit_opinion_PSE_ISR.csv', dtype=comment_dtypes, parse_dates = parse_dates)
     #return print('successful')
