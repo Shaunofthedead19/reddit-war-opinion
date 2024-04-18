@@ -68,7 +68,7 @@ While the dataset has been regularly updated the author did forget to configure 
 ## Project Architecture
 This Architecture depicts an end-to-end overview of the Project and its components.
 
-![Project Architecture](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/Project Architecture.PNG)
+![Project Architecture](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/Project%20Architecture.PNG)
 
 ### Technologies
 * **Cloud**: [Google Cloud Platform (GCP)](https://cloud.google.com/?hl=en)
