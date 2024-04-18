@@ -1,4 +1,4 @@
-# Reddit War Opinion
+# Reddit War Opinion Analysis
 ***
 
 ## Table of Contents
@@ -23,10 +23,11 @@ As part of my final project for the Data Engineering Zoomcamp 2024, I have selec
 
 ### Problem Description
 This project aims to successfully read and analyse comments and posts by users on the social media platform Reddit.
-* Create an end-to-end pipeline to read, transform and move data to a Data Warehouse
+* Create an end-to-end pipeline to read, transform and visualize data the data on public comments about the ongoing conflict.
 * Design a Dashboard to analyse Posts and Comments by users on the Platform.
     * How active are the Subreddits?
-    * What is the sentiment observed in the posts and comments?
+    * Which Users have posted the most controversial comments on reddit, and do they hold an active account?
+    * What are some of the highest and lowest scoring posts and subreddits?
 ***
 
 ## Data Source
@@ -81,6 +82,12 @@ This Architecture depicts an end-to-end overview of the Project and its componen
 
 ## Dashboard
 ![Dashboard Image](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/Dashboard.PNG)
+
+The Dasboard as shown above depicts the various trends on the conflict. You can access the Dashboard [here](https://lookerstudio.google.com/reporting/765ce252-4c7f-4830-865b-d9ee0a68d88c)
+Some things I observed:
+* We can see that while the volume of public comments rose on the onset of conflict, it has shown a downward and stabilising trend.
+* Many Users that posted controversial comments, ended up deleting their accounts. Could they also be bots?
+* 'IsraelPalestine' seems to be the most active subreddit following the conflict.
 
 ## Reproducing Project
 #### Prerequisites
@@ -185,7 +192,7 @@ and execute the following commands to create GCP resources, **Google Cloud Stora
     terraform apply --var="<ENTER-PROJECT-ID>"
     ```
     The terraform directory contains `main.tf` and `variable.tf` files, which contain the definition of the GCS Bucket and BigQuery dataset to be created, and the values configured to variables.
-4. Similarly, in the Visual Studio File Explorer, navigate to "~/reddit-war-opinion/mage/" and edit  From the terminal, navigate to mage directory of cloned repo ("~/reddit-war-opinion/mage/"). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to "~/reddit-war-opinion/mage/" and create a .env file, which will contain the following environment variables for you Mage AI image:
+4. Similarly, in the Visual Studio File Explorer, navigate to "~/reddit-war-opinion/mage/" and edit From the terminal, navigate to mage directory of cloned repo "~/reddit-war-opinion/mage/". This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to "~/reddit-war-opinion/mage/" and create a .env file, which will contain the following environment variables for you Mage AI image:
     `PROJECT_NAME=reddit-war-opinion`
     `GCLOUD_PROJECT_NAME=<GCLOUD-PROJECT-NAME>`
 Once done, use the following command to build and run the Mage AI docker image of your project.
