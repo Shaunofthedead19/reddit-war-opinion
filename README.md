@@ -153,7 +153,7 @@ Setting Up GCP with your google account allows for $300 worth credit on a 90-day
     Log into your VM using a bash terminal and `ssh <VM-Name>` and clone the reddit-war-opinion repo using this [link](https://github.com/Shaunofthedead19/reddit-war-opinion.git).
     Currently while we have all the prerequisites installed for this project the repo mentioned above will contain all the files required to successfully execute the project. However, we still have to add my-credentials.json and kaggle.json locations within the reddit-war-opinion project to successfully authenticate and create resources.
 2. Add Key File Locations to Project
-    The two key files my-credentials.json and kaggle.json need to be stored in a location where both terraform and Mage AI can access them. Since, we are running a docker image to run Mage AI, the home directory (/home/src/) is actually configured as '~/home/username/reddit-war-opinion/mage/', i.e. the home directory for Mage AI starts from the location: '~/home/username/reddit-war-opinion/mage/' and its files and subdirectories. The two key files would ideally house in this location as it also allows our pipelines to detect the files more easily.
+    The two key files my-credentials.json and kaggle.json need to be stored in a location where both terraform and Mage AI can access them. Since, we are running a docker image to run Mage AI, the home directory (/home/src/) is actually configured as "~/home/username/reddit-war-opinion/mage/", i.e. the home directory for Mage AI starts from the location: "~/home/username/reddit-war-opinion/mage/" and its files and subdirectories. The two key files would ideally house in this location as it also allows our pipelines to detect the files more easily.
     From the home directory in bash (/home/username/), use, the following to copy <key-file>:
     ```bash
     cp '~/.gc/my-credentials..json' '~/reddit-war-opinion/mage/my-credentials.json'
@@ -176,7 +176,7 @@ and execute the following commands to create GCP resources, **Google Cloud Stora
     terraform apply --var="<ENTER-PROJECT-ID>"
     ```
     The terraform directory contains `main.tf` and `variable.tf` files, which contain the definition of the GCS Bucket and BigQuery dataset to be created, and the values configured to variables.
-4. Similarly, in the Visual Studio File Explorer, navigate to '~/reddit-war-opinion/mage/' and edit  From the terminal, navigate to mage directory of cloned repo ('~/reddit-war-opinion/mage/'). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to ~/reddit-war-opinion/mage/ create a .env file, which will contain the following environment variables for you Mage AI image:
+4. Similarly, in the Visual Studio File Explorer, navigate to "~/reddit-war-opinion/mage/" and edit  From the terminal, navigate to mage directory of cloned repo ("~/reddit-war-opinion/mage/"). This folder contains the files necessary to build Mage AI image and run our pipelines and tables. Before building image, navigate to ~/reddit-war-opinion/mage/ create a .env file, which will contain the following environment variables for you Mage AI image:
     `PROJECT_NAME=reddit-war-opinion`
     `GCLOUD_PROJECT_NAME=<GCLOUD-PROJECT-NAME>`
 Once done, use the following command to build and run the Mage AI docker image of your project.
