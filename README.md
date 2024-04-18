@@ -71,7 +71,7 @@ This Architecture depicts an end-to-end overview of the Project and its componen
 * **Visualisation**: [Looker Studio](https://cloud.google.com/looker-studio?hl=en)
 
 ## Dashboard
-![Dashboard Image]
+![Dashboard Image](https://github.com/Shaunofthedead19/reddit-war-opinion/blob/master/img/Dashboard.PNG)
 
 ## Reproducing Project
 #### Prerequisites
