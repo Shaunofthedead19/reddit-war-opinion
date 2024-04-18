@@ -1,6 +1,6 @@
 variable "credentials" {
   description = "My Credentials"
-  default     = "/home/shaunak/reddit-war-opinion/de-project-terraform.json"
+  default     = "/home/shaunak/reddit-war-opinion/mage/de-project-terraform.json"
 }
 
 variable "project" {
